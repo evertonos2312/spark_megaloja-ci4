@@ -25,4 +25,9 @@ class BannerModel extends Model
             'rules' => 'required'
         ]
     ];
+
+    public function getByTipo($tipo)
+    {
+        return $this->where('tipo', $tipo)->first();
+    }
 }

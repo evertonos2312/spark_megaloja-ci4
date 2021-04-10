@@ -45,13 +45,41 @@ class ProdutoModel extends Model
         ]
     ];
 
-    /*
-    Retorna todos os registros do banco de dados
-    @return array
-    */
-
+    /**
+     * Retorna os produtos em promoção
+     *
+     * @return array
+     */
+    public function produtosEmPromocao() : array
+    {
+        return $this->where('promocao', true)->findAll();
+    }
+    
+    /**
+     * Retorna todos os registros do banco de dados.
+     *
+     * @return array
+     */
     public function get()
     {
         return $this->select("id, foto, nome_produto, valor, desconto")->findAll();
+    }
+
+    /**
+     * Retorna um registro pelo seu ID
+     *
+     * @param [type] $id
+     * @return array
+     */
+    public function getById($id){
+        return $this->where('id', $id)->first();
+    }
+
+    public function getByIdCategoria($id_categoria)
+    {
+        return $this->where([
+            'categorias_id' => $id_categoria,
+            'ativo' => true
+        ])->orderBy('nome_produto')->findAll();
     }
 }

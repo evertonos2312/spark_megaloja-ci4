@@ -27,7 +27,20 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['funcoes', 'html'];
+	protected $helpers = ['funcoes', 'html', 'form', 'url', 'Sys_helper'];
+	public $ns_model;
+	/**
+	 * Instance of the main Request object.
+	 *
+	 * @var HTTP\IncomingRequest
+	 */
+	protected $request;
+	/**
+	 * Instance of the main Request object.
+	 *
+	 * @var HTTP\ResponseInterface
+	 */
+	protected $response;
 
 	/**
 	 * Constructor.
@@ -36,7 +49,7 @@ class BaseController extends Controller
 	 * @param ResponseInterface $response
 	 * @param LoggerInterface   $logger
 	 */
-	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
@@ -45,6 +58,54 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.: 
+		$this->parser = \Config\Services::parser();
 		$this->session = \Config\Services::session();
+		$this->SetInitialData();
+	}
+
+	public function display($view, $data = false)
+	{
+		if(!$data){
+			$data = array();
+		}
+		echo $this->parser->setData($data)->render('_common/header');
+
+		echo $this->parser->setData($data)->render($view);
+		
+		echo $this->parser->setData($data)->render('_common/footer');
+
+
+		
+	}
+	
+	public function SetInitialData()
+	{
+		//Initial data for view, assuming this it's gonna be used in all pages
+		
+		$uri = service('uri');
+		$pagina = $uri->getSegment(1);
+		$id_categoria = count($uri->getSegments()) === 3 ? $uri->getSegments()[2] : null;
+
+		$dataArr = array(
+			'app_url' => base_url().'/',
+			'title' => '',
+			'uri' => $uri,
+			'pagina' => $pagina,
+			'id_categoria' => $id_categoria,
+			'msg' => $this->session->getFlashdata('msg'),
+			'isLoggedIn' => $this->session->get('auth_user'),
+			'admin' => false
+		);
+		$this->parser->setData($dataArr);
+		
+	}
+
+	public function SetMdl()
+	{
+		//Let's call for MDL (model) for short code in Controllers
+		$namespace_call = ($this->ns_model) ? $this->ns_model : '\\App\\Models\\'.$this->module_name.'\\'.$this->module_name.'model';
+		if(class_exists($namespace_call)){
+			$this->mdl = new $namespace_call();
+		}
 	}
 }

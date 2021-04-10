@@ -15,11 +15,23 @@ class Home extends BaseController
 		$dadosCategorias = new CategoriaModel();
 		$dadosProdutos = new ProdutoModel();
 
+		
+		$produtos = $dadosProdutos->get();
+		if($produtos){
+			foreach($produtos as $key => $produto){
+				$valorProduto = $produtos[$key]['valor'];
+				$desconto = $produtos[$key]['desconto'];
+				$produtos[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
+				$produtos[$key]['parcelas'] = $valorProduto / 10;
+			}
+		}
 		$data = [
 			'banners' => $dadosBanners->findAll(),
 			'categorias' => $dadosCategorias->findAll(),
-			'produtos_chunk' => array_chunk($dadosProdutos->get(), 3)
+			'produtos_chunk' => $produtos
 		];
-		return view('home/index', $data);
+
+
+		$this->display('home/index', $data);
 	}
 }

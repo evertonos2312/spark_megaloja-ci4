@@ -1,0 +1,5 @@
+<div class="erro">
+    <p><?php echo $mensagem?></p>
+    <hr>
+    <p><?php echo anchor(base_url(), 'Página Inicial')?></p>
+</div>
