@@ -1,85 +1,122 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Mega Loja-Virtual</title>
-    <link rel="stylesheet" type="text/css" href="{app_url}assets/css/estilos.css">
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Mega Loja-Virtual</title>
+
+<link href="{app_url}assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+<script src="{app_url}assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="{app_url}assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="{app_url}assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="{app_url}assets/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+
+<!-- custom style -->
+<link href="{app_url}assets/css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="{app_url}assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="{app_url}assets/js/script.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
 
 </head>
-
 <body>
-    {pagina}
-    {id_categoria}
-    <div class="container">
-        <div class="header">
-            <div class="container-header">
-                <div class="logotipo">
-                    <a href="{app_url}"><img src="{app_url}assets/imagens/logo.png"></a>
-                </div>
-                <div class="banner">
-                    <a href="javascript:void()"><img src="{app_url}banner/getFoto/topo"></a>
-                </div>
-            </div>
-            <div class="menu">
-                <div class="menu-esquerdo">
-                    <nav>
-                        <ul>
-                            <li> <a href="{app_url}">Home</a></li>
-                            <li> <a href="{app_url}/promocao">Promoções</a></li>
-                            <li> <a href="{app_url}/produto">Produtos</a></li>
-                            {if !$isLoggedIn}
-                                <li> <a href="{app_url}/cadastro">Cadastra-se</a></li>
-                            {endif}
-                            <li><a href="{app_url}/contato">Contato</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="menu-direito">
-                    <nav>
-                        <ul>
-                            {if $isLoggedIn}
-                                <li class="boas-vindas">Bem-vindo {isLoggedIn.nome}</li>
-                                <li> <a href="{app_url}login/signout">Sair</a></li>
-                            {else}
-                                <li> <a href="{app_url}login">Logar</a></li>
-                            {endif}
-                        </ul>
-                    </nav>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
 
-        <div class="coluna_esquerda">
-            <div class="categorias">
-                <h2>:: Categorias</h2>
-                <ul>
-                    {categorias}
-                        <li><a href="{app_url}produto/porCategoria/{id}">:: {descricao}</a></li>
-                    {/categorias}
-                </ul>
-            </div>
-            <div class="social">
-                <h2>:: Social</h2>
-                <div class="icones_linha1">
-                    <div class="facebook">
-                        <a href="https://www.facebook.com" target="_blank"><img src="{app_url}assets/imagens/facebook.png"></a>
 
-                    </div>
-                    <div class="yt">
-                        <a href="http://www.youtube.com" target="_blank"><img src="{app_url}assets/imagens/youtube.png"></a>
-                    </div>
-                </div>
-                <div class="icones_linha2">
-                    <div class="twitter">
-                        <a href="http://www.twitter.com" target="_blank"><img src="{app_url}assets/imagens/twitter.png"></a>
-                    </div>
-                    <div class="instagram">
-                        <a href="http://www.instagram.com" target="_blank"><img src="{app_url}assets/imagens/instagram.jpg"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<header class="section-header">
 
-        <section class="conteudo"> 
+
+<section class="header-main border-bottom">
+	<div class="container">
+<div class="row align-items-center">
+	<div class="col-lg-2 col-6">
+		<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
+			<img class="logo" src="{app_url}assets/images/logo.png">
+		</a> <!-- brand-wrap.// -->
+	</div>
+	<div class="col-lg-6 col-12 col-sm-12">
+		<form action="#" class="search">
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" placeholder="Buscar">
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i> Buscar
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div> <!-- col.// -->
+	<div class="col-lg-4 col-sm-6 col-12">
+		<div class="widgets-wrap float-lg-right">
+			<div class="widget-header  mr-3">
+				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+				<span class="badge badge-pill badge-danger notify">0</span>
+			</div>
+			<div class="widget-header icontext">
+				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+				<div class="text">
+                    {if $isLoggedIn}
+					<span class="text-muted">Bem-vindo {isLoggedIn.nome}</span>
+                    {else}
+					<div> 
+						<a href="{app_url}login">Entrar</a> |  
+						<a href="{app_url}cadastro"> Cadastrar</a>
+					</div>
+                    {endif}
+				</div>
+			</div>
+		</div> <!-- widgets-wrap.// -->
+	</div> <!-- col.// -->
+</div> <!-- row.// -->
+	</div> <!-- container.// -->
+</section> <!-- header-main .// -->
+</header> <!-- section-header.// -->
+
+
+<nav class="navbar navbar-main navbar-expand-lg navbar-light border-bottom">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+      	<li class="nav-item dropdown">
+          <a class="nav-link pl-0" data-toggle="dropdown" href="#"><strong> <i class="fa fa-bars"></i> &nbsp  Todas Categorias</strong></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Foods and Drink</a>
+            <a class="dropdown-item" href="#">Home interior</a>
+            <div class="dropdown-divider"></div>
+            {categorias}
+            <a class="dropdown-item" href="{app_url}produto/porCategoria/{id_categoria}">{descricao}</a>
+            {/categorias}
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tecnologia</a>
+        </li>
+      </ul>
+    </div> <!-- collapse .// -->
+  </div> <!-- container .// -->
+</nav>
+
+</header> <!-- section-header.// -->

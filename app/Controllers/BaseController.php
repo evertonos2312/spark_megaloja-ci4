@@ -63,11 +63,16 @@ class BaseController extends Controller
 		$this->SetInitialData();
 	}
 
-	public function display($view, $data = false)
+	public function display($view, $data = false, $optional = false)
 	{
 		if(!$data){
 			$data = array();
 		}
+
+		if($optional){
+			$this->parser->setData($optional);
+		}
+
 		echo $this->parser->setData($data)->render('_common/header');
 
 		echo $this->parser->setData($data)->render($view);
@@ -82,16 +87,10 @@ class BaseController extends Controller
 	{
 		//Initial data for view, assuming this it's gonna be used in all pages
 		
-		$uri = service('uri');
-		$pagina = $uri->getSegment(1);
-		$id_categoria = count($uri->getSegments()) === 3 ? $uri->getSegments()[2] : null;
 
 		$dataArr = array(
 			'app_url' => base_url().'/',
 			'title' => '',
-			'uri' => $uri,
-			'pagina' => $pagina,
-			'id_categoria' => $id_categoria,
 			'msg' => $this->session->getFlashdata('msg'),
 			'isLoggedIn' => $this->session->get('auth_user'),
 			'admin' => false

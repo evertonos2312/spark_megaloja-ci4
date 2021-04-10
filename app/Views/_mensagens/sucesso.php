@@ -1,5 +1,5 @@
 <div class="sucesso">
-    <p><?php echo $mensagem?></p>
+    <p>{mensagem}</p>
     <hr>
-    <p><?php echo anchor(base_url(), 'Página Inicial')?></p>
+    <p> <a href="{app_url}">Página Inicial</a></p>
 </div>

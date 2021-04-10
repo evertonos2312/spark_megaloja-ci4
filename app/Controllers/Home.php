@@ -16,7 +16,7 @@ class Home extends BaseController
 		$dadosProdutos = new ProdutoModel();
 
 		
-		$produtos = $dadosProdutos->get();
+		$produtos = $dadosProdutos->getDestaque();
 		if($produtos){
 			foreach($produtos as $key => $produto){
 				$valorProduto = $produtos[$key]['valor'];

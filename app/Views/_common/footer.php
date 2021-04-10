@@ -1,30 +1,88 @@
-</section>
-<div class="clear"></div>
-        <div class="footer">
-
-            <div class="logotipo_footer">
-                <img src="{app_url}assets/imagens/logo.png">
-            </div>
-            <div class="texto_footer">
-                <nav>
-                    <ul class="menu-footer">
-                        <li> <a href="{app_url}">Home</a></li>
-                        <li> <a href="{app_url}promocao"</li>
-                        <li> <a href="{app_url}produto"</li>
+<footer class="section-footer border-top bg">
+	<div class="container">
+		<section class="footer-top  padding-y">
+			<div class="row">
+				<aside class="col-md col-6">
+					<h6 class="title">Brands</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">Adidas</a></li>
+						<li> <a href="#">Puma</a></li>
+						<li> <a href="#">Reebok</a></li>
+						<li> <a href="#">Nike</a></li>
+					</ul>
+				</aside>
+				<aside class="col-md col-6">
+					<h6 class="title">Company</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">About us</a></li>
+						<li> <a href="#">Career</a></li>
+						<li> <a href="#">Find a store</a></li>
+						<li> <a href="#">Rules and terms</a></li>
+						<li> <a href="#">Sitemap</a></li>
+					</ul>
+				</aside>
+				<aside class="col-md col-6">
+					<h6 class="title">Help</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">Contact us</a></li>
+						<li> <a href="#">Money refund</a></li>
+						<li> <a href="#">Order status</a></li>
+						<li> <a href="#">Shipping info</a></li>
+						<li> <a href="#">Open dispute</a></li>
+					</ul>
+				</aside>
+				<aside class="col-md col-6">
+					<h6 class="title">Usuário</h6>
+					<ul class="list-unstyled">
+						<li> <a href="{app_url}/login"> Entrar </a></li>
                         {if !$isLoggedIn}
-                                <li> <a href="{app_url}/cadastro">Cadastra-se</a></li>
+						<li> <a href="{app_url}/cadastro"> Cadastrar </a></li>
                         {endif}
-                        <li><a href="{app_url}/contato">Contato</a></li>
+						<li> <a href="#"> Conta de Usuário </a></li>
+						<li> <a href="#"> Meus Pedidos </a></li>
                         {if $admin}
                             <li> <a href="{app_url}/admin">Administração</a></li>
                         {endif}
-                    </ul>
-                </nav>
-            </div>
-            <div class="clear"></div>
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Social</h6>
+					<ul class="list-unstyled">
+						<li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
+						<li><a href="#"> <i class="fab fa-twitter"></i> Twitter </a></li>
+						<li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
+						<li><a href="#"> <i class="fab fa-youtube"></i> Youtube </a></li>
+					</ul>
+				</aside>
+			</div> <!-- row.// -->
+		</section>	<!-- footer-top.// -->
 
-        </div>
-    </div>
+		<section class="footer-bottom row">
+			<div class="col-md-2">
+				<p class="text-muted"> &copy 2021 Everton Silva</p>
+			</div>
+			<div class="col-md-8 text-md-center">
+				<span  class="px-2">email@empresa.com.brio</span>
+				<span  class="px-2">11-9999-9999</span>
+				<span  class="px-2">Endereço, 999</span>
+			</div>
+			<div class="col-md-2 text-md-right text-muted">
+				<i class="fab fa-lg fa-cc-visa"></i>
+				<i class="fab fa-lg fa-cc-paypal"></i>
+				<i class="fab fa-lg fa-cc-mastercard"></i>
+			</div>
+		</section>
+	</div><!-- //container -->
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+<!-- jQuery -->
+<script src="{app_url}assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+
+
+<!-- custom javascript -->
+<script src="{app_url}assets/js/script.js" type="text/javascript"></script>
+
 
 </body>
 </html>

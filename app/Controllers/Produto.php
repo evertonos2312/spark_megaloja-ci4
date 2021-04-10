@@ -19,28 +19,50 @@ class Produto extends BaseController
 
     public function index()
     {
+        
+        $produtos = $this->produtoModel->get();
+		if($produtos){
+			foreach($produtos as $key => $produto){
+				$valorProduto = $produtos[$key]['valor'];
+				$desconto = $produtos[$key]['desconto'];
+				$produtos[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
+				$produtos[$key]['parcelas'] = $valorProduto / 10;
+			}
+		}
+        
+        
         $dados = [
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
-            'produtos_chunk' => count($this->produtoModel->get()) > 0 ? array_chunk($this->produtoModel->get(), 3) : [],
+            'produtos_chunk' => $produtos,
             'titulo' => ':: Produtos'
         ];
 
-        echo view('produtos/index', $dados);
+        $this->display('produtos/index', $dados);
+	
     }
 
     public function porCategoria($id_categoria)
     {
         $produtosPorCategoria = $this->produtoModel->getByIdCategoria($id_categoria);
         $descricaoCategoria = $this->categoriasModel->find($id_categoria)['descricao'];
+
+        if($produtosPorCategoria){
+			foreach($produtosPorCategoria as $key => $produto){
+				$valorProduto = $produtosPorCategoria[$key]['valor'];
+				$desconto = $produtosPorCategoria[$key]['desconto'];
+				$produtosPorCategoria[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
+				$produtosPorCategoria[$key]['parcelas'] = $valorProduto / 10;
+			}
+		}
         $dados = [
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
-            'produtos_chunk' => count($produtosPorCategoria) > 0 ? array_chunk($produtosPorCategoria, 3) : [],
+            'produtos_chunk' => $produtosPorCategoria,
             'titulo' => !is_null($descricaoCategoria) ? ':: Produtos da Categoria ' . $descricaoCategoria : ':: Produtos'
         ];
 
-        echo view('produtos/index', $dados);
+        $this->display('produtos/index', $dados);
     }
 
     public function mostraProduto($id_produto)
@@ -48,10 +70,16 @@ class Produto extends BaseController
         $dados = [
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
-            'produto' => $this->produtoModel->find($id_produto),
         ];
 
-        echo view('produtos/produto', $dados);
+        // echo '<pre>';
+        // print_r($dados['categorias']);
+        // echo '</pre>';
+        // die();
+
+        $produto = $this->produtoModel->find($id_produto);
+
+        $this->display('produtos/detalhes', $dados, $produto);
     }
 
     //retorna uma foto do sistema

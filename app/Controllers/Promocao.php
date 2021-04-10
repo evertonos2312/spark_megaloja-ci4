@@ -13,12 +13,22 @@ class Promocao extends BaseController
         $categoriasModel = new CategoriaModel();
 
         $produtosEmPromocao = $produtoModel->produtosEmPromocao();
+
+		if($produtosEmPromocao){
+			foreach($produtosEmPromocao as $key => $produto){
+				$valorProduto = $produtosEmPromocao[$key]['valor'];
+				$desconto = $produtosEmPromocao[$key]['desconto'];
+				$produtosEmPromocao[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
+				$produtosEmPromocao[$key]['parcelas'] = $valorProduto / 10;
+			}
+		}
         $dados = [
             'categorias' => $categoriasModel->findAll(),
             'banners' => $bannersModel->findAll(),
-            'produtos_chunk' => count($produtosEmPromocao) > 0 ? array_chunk($produtosEmPromocao, 3) : []
+            'produtos_chunk' => $produtosEmPromocao,
+            'titulo' => '::Promoções'
         ];
 
-        echo view('promocoes/index', $dados);
+        $this->display('promocoes/index', $dados);
     }
 }

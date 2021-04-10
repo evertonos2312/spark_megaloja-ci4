@@ -64,6 +64,17 @@ class ProdutoModel extends Model
     {
         return $this->select("id, foto, nome_produto, valor, desconto")->findAll();
     }
+    
+    /**
+     * Retorna todos os destaques do banco de dados.
+     *
+     * @return array
+     */
+    public function getDestaque()
+    {
+        return $this->select("id, foto, nome_produto, valor, desconto")->
+        where(['destaque' => 1])->findAll();
+    }
 
     /**
      * Retorna um registro pelo seu ID
