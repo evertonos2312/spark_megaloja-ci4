@@ -25,8 +25,8 @@ class Produto extends BaseController
 			foreach($produtos as $key => $produto){
 				$valorProduto = $produtos[$key]['valor'];
 				$desconto = $produtos[$key]['desconto'];
-				$produtos[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
-				$produtos[$key]['parcelas'] = $valorProduto / 10;
+				$produtos[$key]['valor_final'] = formata_valor($valorProduto - ($valorProduto * $desconto / 100));
+				$produtos[$key]['parcelas'] = formata_valor($valorProduto / 10);
 			}
 		}
         
@@ -35,7 +35,8 @@ class Produto extends BaseController
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
             'produtos_chunk' => $produtos,
-            'titulo' => ':: Produtos'
+            'titulo' => ':: Todos produtos',
+            'descricao_categoria' => 'Todos'
         ];
 
         $this->display('produtos/index', $dados);
@@ -49,33 +50,33 @@ class Produto extends BaseController
 
         if($produtosPorCategoria){
 			foreach($produtosPorCategoria as $key => $produto){
+
 				$valorProduto = $produtosPorCategoria[$key]['valor'];
 				$desconto = $produtosPorCategoria[$key]['desconto'];
-				$produtosPorCategoria[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
-				$produtosPorCategoria[$key]['parcelas'] = $valorProduto / 10;
+				$produtosPorCategoria[$key]['valor_final'] = formata_valor($valorProduto - ($valorProduto * $desconto / 100));
+				$produtosPorCategoria[$key]['parcelas'] = formata_valor($valorProduto / 10);
+
 			}
 		}
         $dados = [
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
             'produtos_chunk' => $produtosPorCategoria,
-            'titulo' => !is_null($descricaoCategoria) ? ':: Produtos da Categoria ' . $descricaoCategoria : ':: Produtos'
+            'titulo' => !is_null($descricaoCategoria) ? $descricaoCategoria : ':: Produtos',
+            'id_categoria' => $id_categoria,
+            'descricao_categoria' => $descricaoCategoria,
         ];
+
 
         $this->display('produtos/index', $dados);
     }
 
-    public function mostraProduto($id_produto)
+    public function detalhes($id_produto)
     {
         $dados = [
             'categorias' => $this->categoriasModel->findAll(),
             'banners' => $this->bannersModel->findAll(),
         ];
-
-        // echo '<pre>';
-        // print_r($dados['categorias']);
-        // echo '</pre>';
-        // die();
 
         $produto = $this->produtoModel->find($id_produto);
 
@@ -103,5 +104,27 @@ class Produto extends BaseController
         }else{
            return redirect()->to('/mensagem/erro')->with('mensagem', 'Produto não encontrado');
         }
+    }
+
+    public function getPromocao()
+    {
+        $produtos = $this->produtoModel->getPromocao();
+		if($produtos){
+			foreach($produtos as $key => $produto){
+				$valorProduto = $produtos[$key]['valor'];
+				$desconto = $produtos[$key]['desconto'];
+				$produtos[$key]['valor_final'] = formata_valor($valorProduto - ($valorProduto * $desconto / 100));
+				$produtos[$key]['parcelas'] = formata_valor($valorProduto / 10);
+			}
+		}
+		$data = [
+			'banners' => $this->bannersModel->findAll(),
+			'categorias' => $this->categoriasModel->findAll(),
+			'produtos_chunk' => $produtos,
+            'titulo' => 'Produtos em Promoção'
+		];
+
+
+		$this->display('produtos/index', $data);
     }
 }

@@ -21,8 +21,8 @@ class Home extends BaseController
 			foreach($produtos as $key => $produto){
 				$valorProduto = $produtos[$key]['valor'];
 				$desconto = $produtos[$key]['desconto'];
-				$produtos[$key]['valor_final'] = $valorProduto - ($valorProduto * $desconto / 100);
-				$produtos[$key]['parcelas'] = $valorProduto / 10;
+				$produtos[$key]['valor_final'] = formata_valor($valorProduto - ($valorProduto * $desconto / 100));
+				$produtos[$key]['parcelas'] = formata_valor($valorProduto / 10);
 			}
 		}
 		$data = [

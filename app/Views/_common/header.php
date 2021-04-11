@@ -22,6 +22,7 @@
 
 <!-- custom style -->
 <link href="{app_url}assets/css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="{app_url}assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="{app_url}assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
 <!-- custom javascript -->
@@ -103,8 +104,8 @@ $(document).ready(function() {
       	<li class="nav-item dropdown">
           <a class="nav-link pl-0" data-toggle="dropdown" href="#"><strong> <i class="fa fa-bars"></i> &nbsp  Todas Categorias</strong></a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Foods and Drink</a>
-            <a class="dropdown-item" href="#">Home interior</a>
+            <a class="dropdown-item" href="#">Exemplo 1</a>
+            <a class="dropdown-item" href="#">Exemplo 2</a>
             <div class="dropdown-divider"></div>
             {categorias}
             <a class="dropdown-item" href="{app_url}produto/porCategoria/{id_categoria}">{descricao}</a>
@@ -112,7 +113,7 @@ $(document).ready(function() {
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Tecnologia</a>
+          <a class="nav-link" href="{app_url}produto/getPromocao">Promoções</a>
         </li>
       </ul>
     </div> <!-- collapse .// -->

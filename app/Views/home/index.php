@@ -13,16 +13,16 @@
 <section class="section-content">
 	<div class="container">
 		<header class="section-heading">
-			<a href="#" class="btn btn-outline-primary float-right">Veja mais</a>
+			<a href="{app_url}produto/index" class="btn btn-outline-primary float-right">Veja mais</a>
 			<h3 class="section-title">Em destaque</h3>
 		</header><!-- sect-heading -->
 		<div class="row">
 			{produtos_chunk}
 			<div class="col-md-3">
-				<div class="card card-product-grid">
+				<div class="card card-product-grid product">
 					<a href="" class="img-wrap"> <img src="{app_url}/produto/getFoto/{id}"> </a>
 					<figcaption class="info-wrap">
-						<a href="" class="title">{nome_produto}</a>
+						<a href="{app_url}produto/detalhes/{id}" class="title">{nome_produto}</a>
 						
 						<div class="rating-wrap">
 							<ul class="rating-stars">

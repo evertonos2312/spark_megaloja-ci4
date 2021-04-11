@@ -75,6 +75,16 @@ class ProdutoModel extends Model
         return $this->select("id, foto, nome_produto, valor, desconto")->
         where(['destaque' => 1])->findAll();
     }
+    /**
+     * Retorna todos as promoções do banco de dados.
+     *
+     * @return array
+     */
+    public function getPromocao()
+    {
+        return $this->select("id, foto, nome_produto, valor, desconto")->
+        where(['promocao' => 1])->findAll();
+    }
 
     /**
      * Retorna um registro pelo seu ID
