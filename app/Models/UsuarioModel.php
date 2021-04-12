@@ -6,21 +6,28 @@ use CodeIgniter\Model;
 
 class UsuarioModel extends Model
 {
-    protected $table = 'usuarios';
+    protected $table = 'users';
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
-        'nome',
+        'name',
+        'username',
+        'password',
         'email',
-        'endereco',
-        'senha'
+        'active',
+        'phone',
+        'created_on'
     ];
 
     protected $beforeInsert = ['hashPassword'];
 
     protected $validationRules = [
-        'nome' => [
+        'name' => [
             'label' => 'Nome',
+            'rules' => 'required'
+        ],
+        'username' => [
+            'label' => 'Usuário',
             'rules' => 'required'
         ],
         'email' => [
@@ -31,13 +38,24 @@ class UsuarioModel extends Model
             'label' => 'Endereço',
             'rules' => 'required'
         ],
-        'senha' => [
+        'password' => [
             'label' => 'Senha',
             'rules' => 'required'
         ],
         'repita_senha' => [
             'label' => 'Repita a Senha',
-            'rules' => 'required|matches[senha]'
-        ]
+            'rules' => 'required|matches[password]'
+        ],
+
     ];
+
+    /**
+     * Retorna todos os registros do banco de dados.
+     *
+     * @return array
+     */
+    public function get()
+    {
+        return $this->findAll();
+    }
 }

@@ -82,6 +82,23 @@ class BaseController extends Controller
 
 		
 	}
+
+	public function display_adm($view, $data = false, $optional = false)
+	{
+		if(!$data){
+			$data = array();
+		}
+
+		if($optional){
+			$this->parser->setData($optional);
+		}
+
+		echo $this->parser->setData($data)->render('_common/admin/header');
+
+		echo $this->parser->setData($data)->render($view);
+		
+		echo $this->parser->setData($data)->render('_common/admin/footer');
+	}
 	
 	public function SetInitialData()
 	{
