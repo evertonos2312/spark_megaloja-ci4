@@ -60,6 +60,7 @@ class BaseController extends Controller
 		// E.g.: 
 		$this->parser = \Config\Services::parser();
 		$this->session = \Config\Services::session();
+		$this->validation =  \Config\Services::validation();
 		$this->SetInitialData();
 	}
 
@@ -103,12 +104,18 @@ class BaseController extends Controller
 	public function SetInitialData()
 	{
 		//Initial data for view, assuming this it's gonna be used in all pages
-		
+		$msg_type = '';
+		if($this->session->getFlashdata('msg_type') == 'success'){
+			$msg_type = 'alert-success';
+		}elseif($this->session->getFlashdata('msg_type') == 'danger'){
+			$msg_type = 'alert-danger';
+		}
 
 		$dataArr = array(
 			'app_url' => base_url().'/',
-			'title' => '',
+			'main_title' => 'PHP Store',
 			'msg' => $this->session->getFlashdata('msg'),
+			'msg_type' => $msg_type,
 			'isLoggedIn' => $this->session->get('auth_user'),
 			'admin' => false
 		);

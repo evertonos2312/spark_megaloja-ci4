@@ -60,3 +60,33 @@ function darkmode(btn_this) {
       btn_this.className += ' active'; 
 	}
 }
+
+$(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
+
+
+  function changeCheck(){
+     // Get the checkbox
+   var checkBox = document.getElementById("change_password");
+   // Get the output text
+   var text = document.getElementById("div-pass");
+
+   // If the checkbox is checked, display the output text
+   if (checkBox.checked == true){
+      text.style.display = "block";
+      document.getElementById("confirm_password").required = true;
+   } else {
+      text.style.display = "none";
+      document.getElementById("confirm_password").required = false;
+   }
+  }
+
+
