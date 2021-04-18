@@ -11,6 +11,9 @@ class Home extends \App\Controllers\BaseController
 
     public function index()
     {
+        if(!$this->session->get('auth_user')){
+            return redirect()->to(base_url().'/admin/login/index');
+        }
         $this->display_adm('admin/home/index');
     }
 }

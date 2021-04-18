@@ -1,4 +1,6 @@
 
+var getUrl = window.location;
+var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 //===== jquery code for sidebar menu
 $('.menu-item.has-submenu .menu-link').on('click', function(e){
 	e.preventDefault();

@@ -9,7 +9,6 @@
 
 <script src="{app_url}assets/admin/js/jquery-3.5.0.min.js"></script>
 <script src="{app_url}assets/admin/js/bootstrap.bundle.min.js"></script>
-<script src="{app_url}assets/admin/js/bootstrap.bundle.min.js"></script>
 <script language="javascript" type="text/javascript" src="{app_url}assets/js/sweetalert2.all.min.js"></script>
 
 <!-- Latest compiled and minified Bootstrap JavaScript -->

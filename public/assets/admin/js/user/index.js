@@ -1,58 +1,46 @@
-function userDelete(user_id)
+function userDelete(user_id, user_name)
 {
-    let id =  $("input[id=user_id").val();
-    console.log(user_id);
+    let id_user = user_id;
+    let name = user_name;
+    console.log(name);
     Swal.fire({
-        title: 'Alterar Status de Pagamento',
-        input: 'select',
-        inputOptions: {'processando': 'Processando',
-        'aguardando': 'Aguardando Pagamento',
-        'cancelado': 'Cancelado',
-        'recusado': 'Recusado',
-        'pago': 'Pago'},
-        inputPlaceholder: 'Status',
+        title: 'Deletar - ' + name + '?',
+        text: "Essa ação não pode ser revertida!",
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Confirmar',
-        inputValidator: (status) => {
-            return new Promise((resolve) => {
-                if(status){
-                    $.ajax({
-                        url: app_url+'admin/usuarios/delete',
-                        method: 'post',
-                        dataType: 'json',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                        data: JSON.stringify({
-                            id: user_id, 
-                            status: status,
-                        }),
-                        success: function(d){
-                            Swal.close();
-                            if(d.status == 'success' && !!d.detail.id){
-                                Swal.fire({
-                                    title: 'Sucesso!',
-                                    text: 'Status alterado com suceso!',
-                                    icon: 'success'
-                                });
-                            }
-                        },
-                        error: function(d){
-                            Swal.close();
-                            Swal.fire({
-                                title: 'Ops! Aconteceu algo de errado',
-                                text: 'Não foi possível alterar o status do pagamento.',
-                                icon: 'error',
-                            });
-                        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: baseUrl+'/usuarios/delete',
+                method: 'post',
+                data: {
+                    'usr_id' : id_user
+                },
+                success: function(response){
+                    Swal.close();
+                    if(response.status == 'success' && !!response.detail.id){
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Usuário excluido com suceso!',
+                            icon: 'success'
+                        }).then(function(){
+                            location.reload();
+                        });
+                        
+                    }
+                },
+                error: function(response){
+                    Swal.close();
+                    Swal.fire({
+                        title: 'Ops! Aconteceu algo de errado',
+                        text: 'Não foi possível excluir este usuário.',
+                        icon: 'error',
                     });
-                    resolve();
-                } else{
-                    resolve('Selecione uma opção');
                 }
-            })
+            });
         }
-    })
+      })
 }
+
+

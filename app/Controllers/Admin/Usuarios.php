@@ -14,6 +14,9 @@ class Usuarios extends \App\Controllers\BaseController
 
     public function index()
     {
+        if(!$this->session->get('auth_user')){
+            return redirect()->to(base_url().'/admin/login/index');
+        }
         $users = $this->userModel->getAll();
         if(!empty($users)){
             foreach($users as $key => $produto){
@@ -35,6 +38,9 @@ class Usuarios extends \App\Controllers\BaseController
     }
 
     public function core($user_id = NULL){
+        if(!$this->session->get('auth_user')){
+            return redirect()->to(base_url().'/admin/login/index');
+        }
 
         if(!$user_id){
             $data = [
@@ -70,6 +76,9 @@ class Usuarios extends \App\Controllers\BaseController
     }
 
     public function save($user_id = NULL){
+        if(!$this->session->get('auth_user')){
+            return redirect()->to(base_url().'/admin/login/index');
+        }
         $userPost = $this->request->getPost();
         if(!$user_id){
             if(!empty($userPost)){
@@ -103,35 +112,54 @@ class Usuarios extends \App\Controllers\BaseController
                 'username' => $userPost['username'],
                 'email' => $userPost['email'],
                 'active' =>$userPost['status'],
-                'is_admin' =>$userPost['is_admin']
+                'is_admin' =>$userPost['is_admin'],
+                'master' => $userPost['master'],
             ];
-            $saved = $this->userModel->saveUser($user);
-            if($saved){
-                $this->session->setFlashdata('msg', 'Usuário atualizado com sucesso');
-                $this->session->setFlashdata('msg_type', 'success');
-                return redirect()->to(base_url().'/admin/usuarios/index');
+            
+            if($user['master'] != 1){
+                $saved = $this->userModel->saveUser($user);
+                if($saved){
+                    $this->session->setFlashdata('msg', 'Usuário atualizado com sucesso');
+                    $this->session->setFlashdata('msg_type', 'success');
+                    return redirect()->to(base_url().'/admin/usuarios/index');
+    
+                }else{
+                    $this->session->setFlashdata('msg', 'Ops, não consegui atualizar esse usuário.');
+                    $this->session->setFlashdata('msg_type', 'danger');
+                    return redirect()->to(base_url().'/admin/usuarios/index');
+                }
 
-            }else{
-                $this->session->setFlashdata('msg', 'Ops, não consegui atualizar esse usuário.');
-                $this->session->setFlashdata('msg_type', 'danger');
-                return redirect()->to(base_url().'/admin/usuarios/index');
             }
+            $this->session->setFlashdata('msg', 'Ops, não é possível atualizar usuário master.');
+            $this->session->setFlashdata('msg_type', 'danger');
+            return redirect()->to(base_url().'/admin/usuarios/index');
         }
     }
 
-    public function delete($user_id)
+    public function delete()
     {
-        $ajax = new \App\Libraries\Sys\AjaxLib();
-		$ajax->CheckIncoming();
-		$ajax->CheckRequired(['id', 'deleted']);
-		$bodyAjax = $ajax->GetData();
+        
+        
+        $userPost = $this->request->getPost('usr_id');
+        if(!empty($userPost)){
+            $user = $this->userModel->getId($userPost);
 
-		
-		$user['id'] = $bodyAjax['id'];
-		$user['deleted'] = $bodyAjax['deleted'];
-        $this->userModel->saveUser($user);
-		$return = [];
+            $user['deleted'] = '1';
 
-		$ajax->setSuccess($bodyAjax);
+            $saved = $this->userModel->saveUser($user);
+            if($saved){
+                
+                $data = [
+                    'status' => 'success',
+                    'detail' => [
+                            'id' => $userPost,
+                        ],
+                ];
+                return $this->response->setJSON($data);
+            }else{
+                return $this->response->setJSON('falha');
+            }
+        }
+
     }
 }

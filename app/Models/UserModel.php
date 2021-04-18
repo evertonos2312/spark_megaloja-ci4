@@ -16,7 +16,9 @@ class UserModel extends Model
         'email',
         'active',
         'phone',
-        'created_on'
+        'created_on',
+        'deleted',
+        'is_admin',
     ];
 
     protected $beforeInsert = ['hashPassword'];
@@ -76,20 +78,28 @@ class UserModel extends Model
                 'active' =>  $user['active'],
                 'is_admin' => $user['is_admin'],
                 'created_on' => time(),
+                'deleted' => 0,
             ];
             $save = $this->db->table($this->table)->insert($data);
             if($save){
                 return $data; 
             }
         }else{
-            $data = [
-                'id' => $user['id'],
-                'name' => $user['name'],
-                'username' => $user['username'],
-                'email' => $user['email'],
-                'active' =>  $user['active'],
-                'is_admin' => $user['is_admin'],
-            ];
+
+            if(array_key_exists('master', $user) == false){
+                $data = [
+                    'id' => $user['id'],
+                    'name' => $user['name'],
+                    'username' => $user['username'],
+                    'email' => $user['email'],
+                    'active' =>  $user['active'],
+                    'is_admin' => $user['is_admin'],
+                    'deleted' => $user['deleted'],
+                ];
+
+            }else{
+                return false;
+            }
             
             $save = $this->save($data);
             if($save){
@@ -97,4 +107,22 @@ class UserModel extends Model
             }
         }
     }
+
+    public function SearchLogin($login){
+		$this->select('id, name, email');
+        $this->where([
+            'active' => '1',
+            'username' => $login['username'],
+            'password' => md5($login['password']),
+        ]);
+		$query = $this->get(1);
+		if($query){
+			if($query->resultID->num_rows > 0){
+				return $query->getResult('array')[0];
+			}		
+		}else{
+			// $this->RegisterLastError("Query search login failed: ");	
+		}
+		return false;
+	}
 }

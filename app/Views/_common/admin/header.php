@@ -24,6 +24,7 @@
 
 
 </head>
+{if($isLoggedIn)}
 <body>
 
 <b class="screen-overlay"></b>
@@ -112,9 +113,10 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Meu perfil</a>
                         <a class="dropdown-item" href="#">Configurações</a>
-                        <a class="dropdown-item text-danger" href="#">Sair</a>
+                        <a class="dropdown-item text-danger" href="{app_url}admin/login/logout">Sair</a>
                     </div>
                 </li>
             </ul> 
         </div>
     </header>
+    {endif}

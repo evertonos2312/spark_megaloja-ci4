@@ -65,11 +65,12 @@
                             <td class="text-center">
                                 <a href="" class="btn btn-light"> <i class="fas fa-info"></i> Detalhes</a>
                                 <a href="{app_url}admin/usuarios/core/{id}" class="btn btn-light"> <i class="far fa-edit"></i> Editar</a>
-                                <input type="hidden" id="user_id" value="{id}">
-                                <a onclick="userDelete({id})" class="btn btn-warning"> <i class="fas fa-trash"></i> Excluir</a>
-
+                                <input type="hidden" id="{id}">
+                                
+                                <button id="delete-btn"onclick="userDelete{noparse}({/noparse}'{id}', '{name}'{noparse}){/noparse}" class="btn btn-warning"> <i class="fas fa-trash"></i> Excluir</button>
                             </td>
                         </tr>
+                        
                         {/usuarios}
                     </tbody>
                 </table>
