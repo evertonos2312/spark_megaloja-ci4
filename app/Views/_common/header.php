@@ -75,8 +75,8 @@ $(document).ready(function() {
 			<div class="widget-header icontext">
 				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 				<div class="text">
-                    {if $isLoggedIn}
-					<span class="text-muted">Bem-vindo {isLoggedIn.nome}</span>
+                    {if $isAdmin}
+					<span class="text-muted">Bem-vindo {isAdmin.nome}</span>
                     {else}
 					<div> 
 						<a href="{app_url}login">Entrar</a> |  

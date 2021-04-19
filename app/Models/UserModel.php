@@ -109,9 +109,10 @@ class UserModel extends Model
     }
 
     public function SearchLogin($login){
-		$this->select('id, name, email');
+		$this->select('id, name, email, is_admin, master');
         $this->where([
             'active' => '1',
+            'is_admin' => '1',
             'username' => $login['username'],
             'password' => md5($login['password']),
         ]);
@@ -120,8 +121,6 @@ class UserModel extends Model
 			if($query->resultID->num_rows > 0){
 				return $query->getResult('array')[0];
 			}		
-		}else{
-			// $this->RegisterLastError("Query search login failed: ");	
 		}
 		return false;
 	}

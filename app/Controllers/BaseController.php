@@ -42,6 +42,13 @@ class BaseController extends Controller
 	 */
 	protected $response;
 
+	public function __construct()
+	{
+		$this->session = \Config\Services::session();
+		$this->routes = \Config\Services::router();
+		$this->request = \Config\Services::request();
+	}
+
 	/**
 	 * Constructor.
 	 *
@@ -116,7 +123,8 @@ class BaseController extends Controller
 			'main_title' => 'PHP Store',
 			'msg' => $this->session->getFlashdata('msg'),
 			'msg_type' => $msg_type,
-			'isLoggedIn' => $this->session->get('auth_user'),
+			'isAdmin' => $this->session->get('adm_user'),
+			'isCli' => $this->session->get('auth_user'),
 			'admin' => false
 		);
 		$this->parser->setData($dataArr);

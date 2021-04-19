@@ -9,18 +9,25 @@ class Usuarios extends \App\Controllers\BaseController
     private $userModel;
     public function __construct()
     {
+       
         $this->userModel = new UserModel();
     }
 
     public function index()
     {
-        if(!$this->session->get('auth_user')){
+        if(!$this->session->get('adm_user')){
             return redirect()->to(base_url().'/admin/login/index');
         }
+        
         $users = $this->userModel->getAll();
         if(!empty($users)){
-            foreach($users as $key => $produto){
+            foreach($users as $key => $user){
                 $users[$key]['created_on'] = date('d/m/Y',$users[$key]['created_on']);
+                if($users[$key]['is_admin'] == 0){
+                    $users[$key]['type'] = 'Cliente';
+                }else{
+                    $users[$key]['type'] = 'Admin';
+                }
 				if($users[$key]['active'] == 1){
                     $users[$key]['active'] = "Ativo";
                     $users[$key]['status'] = "success";
@@ -34,11 +41,12 @@ class Usuarios extends \App\Controllers\BaseController
             'usuarios' => $users,
             'title' => 'Usuários',
         ];
+
         $this->display_adm('admin/usuarios/index', $data);
     }
 
     public function core($user_id = NULL){
-        if(!$this->session->get('auth_user')){
+        if(!$this->session->get('adm_user')){
             return redirect()->to(base_url().'/admin/login/index');
         }
 
@@ -76,7 +84,7 @@ class Usuarios extends \App\Controllers\BaseController
     }
 
     public function save($user_id = NULL){
-        if(!$this->session->get('auth_user')){
+        if(!$this->session->get('adm_user')){
             return redirect()->to(base_url().'/admin/login/index');
         }
         $userPost = $this->request->getPost();
@@ -137,8 +145,10 @@ class Usuarios extends \App\Controllers\BaseController
     }
 
     public function delete()
-    {
-        
+    { 
+        if(!$this->session->get('adm_user')){
+            return redirect()->to(base_url().'/admin/login/index');
+        }
         
         $userPost = $this->request->getPost('usr_id');
         if(!empty($userPost)){

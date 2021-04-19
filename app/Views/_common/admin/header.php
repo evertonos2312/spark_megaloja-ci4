@@ -24,7 +24,7 @@
 
 
 </head>
-{if($isLoggedIn)}
+{if($isAdmin)}
 <body>
 
 <b class="screen-overlay"></b>
@@ -42,7 +42,7 @@
     <nav>
     <ul class="menu-aside">
         <li class="menu-item active"> 
-        <a class="menu-link" href="page-index-1.html"> <i class="icon material-icons md-home"></i> 
+        <a class="menu-link" href="{app_url}admin/home/index"> <i class="icon material-icons md-home"></i> 
             <span class="text">Dashboard</span> 
         </a> 
         </li>
@@ -60,9 +60,9 @@
             <span class="text">Pedidos</span> 
         </a>
         <div class="submenu">
-            <a href="page-orders-1.html">Order list 1</a>
-            <a href="page-orders-2.html">Order list 2</a>
-            <a href="page-orders-detail.html">Order detail</a>
+            <a href="page-orders-1.html">Lista 1</a>
+            <a href="page-orders-2.html">Lista 2</a>
+            <a href="page-orders-detail.html">Detalhes</a>
         </div> 
         </li>
 
@@ -79,8 +79,7 @@
             <span class="text">Configurações</span> 
         </a>
         <div class="submenu">
-            <a href="page-settings-1.html">Setting sample 1</a>
-            <a href="page-settings-2.html">Setting sample 2</a>
+            <a href="{app_url}admin/system/index">Sistema</a>
         </div>
         </li>
     </ul>

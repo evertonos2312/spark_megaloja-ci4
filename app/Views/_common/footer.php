@@ -35,7 +35,7 @@
 					<h6 class="title">Usuário</h6>
 					<ul class="list-unstyled">
 						<li> <a href="{app_url}/login"> Entrar </a></li>
-                        {if !$isLoggedIn}
+                        {if !$isAdmin}
 						<li> <a href="{app_url}/cadastro"> Cadastrar </a></li>
                         {endif}
 						<li> <a href="#"> Conta de Usuário </a></li>
