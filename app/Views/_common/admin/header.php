@@ -53,6 +53,7 @@
         <div class="submenu">
             <a href="page-products-table.html">Lista de Produtos</a>
             <a href="page-categories.html">Categorias</a>
+             <a href="{app_url}admin/marcas/index"><i class="fas fa-layer-group"></i> Marcas</a>
         </div>
         </li>
         <li class="menu-item has-submenu"> 

@@ -51,7 +51,7 @@ $(document).ready(function() {
 <div class="row align-items-center">
 	<div class="col-lg-2 col-6">
 		<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
-			<img class="logo" src="{app_url}assets/images/logo.png">
+			<img class="logo" src="{app_url}assets/admin/images/logo2.png">
 		</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-6 col-12 col-sm-12">

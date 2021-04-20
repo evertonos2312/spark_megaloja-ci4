@@ -27,7 +27,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['funcoes', 'html', 'form', 'url', 'Sys_helper'];
+	protected $helpers = ['funcoes', 'html', 'form', 'url', 'Sys_helper', 'recursos_helper'];
 	public $ns_model;
 	/**
 	 * Instance of the main Request object.

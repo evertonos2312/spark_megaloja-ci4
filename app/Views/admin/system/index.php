@@ -90,7 +90,7 @@
                     </div>
                     <div class="mb-3 col-md-2">
                         <label class="form-label">Destaques</label>
-                        <input class="form-control" type="text" name="produtos_destaques" value="{produtos_destaques}" placeholder="Digite aqui">
+                        <input class="form-control" type="number" name="produtos_destaques" value="{produtos_destaques}" placeholder="Digite aqui">
                     </div>
                 </div>
             </div>         

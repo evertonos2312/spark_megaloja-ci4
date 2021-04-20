@@ -86,7 +86,11 @@ class UserModel extends Model
             }
         }else{
 
-            if(array_key_exists('master', $user) == false){
+            // echo '<pre>';
+            // print_r($user);
+            // echo '</pre>';
+            // die();
+            if($user['master'] == 0){
                 $data = [
                     'id' => $user['id'],
                     'name' => $user['name'],

@@ -97,7 +97,8 @@ class Usuarios extends \App\Controllers\BaseController
                     'password' => $userPost['password'],
                     'confirm_password' => $userPost['password'],
                     'active' =>$userPost['status'],
-                    'is_admin' =>$userPost['is_admin']
+                    'is_admin' =>$userPost['is_admin'],
+                    'deleted' => '0'
                 ];
                 if($userPost['password'] === $userPost['password'] ){
                     $saved = $this->userModel->saveUser($user);
@@ -122,6 +123,7 @@ class Usuarios extends \App\Controllers\BaseController
                 'active' =>$userPost['status'],
                 'is_admin' =>$userPost['is_admin'],
                 'master' => $userPost['master'],
+                'deleted' => '0',
             ];
             
             if($user['master'] != 1){

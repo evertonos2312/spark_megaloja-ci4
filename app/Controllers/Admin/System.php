@@ -57,14 +57,6 @@ class System extends \App\Controllers\BaseController
         $data = [
             'title' => 'Informações da Loja',
         ];
-        if(!empty($system)){
-
-
-        }
-        // echo '<pre>';
-        // print_r($data);
-        // echo '</pre>';
-        // die();
         $this->display_adm('admin/system/index', $data, $system);
 
 
