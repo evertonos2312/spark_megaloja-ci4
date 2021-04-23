@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\BannerModel;
-use App\Models\CategoriaModel;
-use App\Models\ProdutoModel;
+use App\Models\CategoriasModel;
+use App\Models\ProdutosModel;
 
 class Home extends BaseController
 {
@@ -12,8 +12,8 @@ class Home extends BaseController
 	{
 		
 		$dadosBanners = new BannerModel();
-		$dadosCategorias = new CategoriaModel();
-		$dadosProdutos = new ProdutoModel();
+		$dadosCategorias = new CategoriasModel();
+		$dadosProdutos = new ProdutosModel();
 
 		
 		$produtos = $dadosProdutos->getDestaque();
@@ -26,6 +26,7 @@ class Home extends BaseController
 			}
 		}
 		$data = [
+			'title' => 'Home',
 			'banners' => $dadosBanners->findAll(),
 			'categorias' => $dadosCategorias->findAll(),
 			'produtos_chunk' => $produtos

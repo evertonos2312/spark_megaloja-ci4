@@ -14,6 +14,7 @@ class Home extends \App\Controllers\BaseController
         if(!$this->session->get('adm_user')){
             return redirect()->to(base_url().'/admin/login/index');
         }
+
         $this->display_adm('admin/home/index');
     }
 }

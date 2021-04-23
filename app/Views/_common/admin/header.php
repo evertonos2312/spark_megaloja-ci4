@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>{main_title} | {title}</title>
@@ -52,7 +52,7 @@
         </a> 
         <div class="submenu">
             <a href="page-products-table.html">Lista de Produtos</a>
-            <a href="page-categories.html">Categorias</a>
+            <a href="{app_url}admin/categorias/index">Categorias</a>
              <a href="{app_url}admin/marcas/index"><i class="fas fa-layer-group"></i> Marcas</a>
         </div>
         </li>
