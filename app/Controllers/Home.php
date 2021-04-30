@@ -11,7 +11,6 @@ class Home extends BaseController
 	public function index()
 	{
 		
-		$dadosBanners = new BannerModel();
 		$dadosCategorias = new CategoriasModel();
 		$dadosProdutos = new ProdutosModel();
 
@@ -27,7 +26,6 @@ class Home extends BaseController
 		}
 		$data = [
 			'title' => 'Home',
-			'banners' => $dadosBanners->findAll(),
 			'categorias' => $dadosCategorias->findAll(),
 			'produtos_chunk' => $produtos
 		];

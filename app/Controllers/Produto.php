@@ -1,8 +1,8 @@
 <?php namespace App\Controllers;
 
 use App\Models\BannerModel;
-use App\Models\CategoriaModel;
-use App\Models\ProdutoModel;
+use App\Models\CategoriasModel;
+use App\Models\ProdutosModel;
 
 class Produto extends BaseController
 {
@@ -12,9 +12,9 @@ class Produto extends BaseController
 
     public function __construct()
     {
-        $this->produtoModel = new ProdutoModel();
+        $this->produtoModel = new ProdutosModel();
         $this->bannersModel = new BannerModel();
-        $this->categoriasModel = new CategoriaModel();
+        $this->categoriasModel = new CategoriasModel();
     }
 
     public function index()

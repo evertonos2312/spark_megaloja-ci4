@@ -13,7 +13,6 @@ class SystemModel extends Model
     protected $allowedFields = [
         'razao_social',
         'nome_fantasia',
-        'password',
         'cnpj',
         'ie',
         'telefone_fixo',

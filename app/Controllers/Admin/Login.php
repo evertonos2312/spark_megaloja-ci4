@@ -51,6 +51,8 @@ class Login extends \App\Controllers\BaseController
         $this->display_adm('admin/login/index', $data);
     }
 
+    
+
     public function logout()
     {
         $this->session->destroy();
